@@ -37,7 +37,7 @@ public:
     void changeCurrentRobot(int CurrentRobotID);
     QComboBox *teamCombo,*robotCombo;
     QLabel *robotpic;
-    QLabel *vellabel,*acclabel;
+    QLabel *vellabel,*acclabel,*divlabel;
     QPushButton *resetBtn,*locateBtn;
     QPushButton *onOffBtn,*setPoseBtn;
     GetPositionWidget* getPoseWidget;

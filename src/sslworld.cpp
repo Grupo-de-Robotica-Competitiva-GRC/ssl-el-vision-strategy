@@ -240,11 +240,12 @@ SSLWorld::SSLWorld(QGLWidget* parent, ConfigWidget* _cfg, RobotsFormation *form1
                               ROBOT_GRAY,
                               k + 1,
                               wheeltexid,
-                              1);
+                              1,
+                              QString::fromStdString(cfg->v_Division->getString()));
     }
     cfg->robotSettings = cfg->yellowSettings;
     for (int k=0;k<cfg->Robots_Count();k++)
-        robots[k+cfg->Robots_Count()] = new Robot(p,ball,cfg,form2->x[k],form2->y[k],ROBOT_START_Z(cfg),ROBOT_GRAY,ROBOT_GRAY,ROBOT_GRAY,k+cfg->Robots_Count()+1,wheeltexid,-1);//XXX
+        robots[k+cfg->Robots_Count()] = new Robot(p,ball,cfg,form2->x[k],form2->y[k],ROBOT_START_Z(cfg),ROBOT_GRAY,ROBOT_GRAY,ROBOT_GRAY,k+cfg->Robots_Count()+1,wheeltexid,-1,QString::fromStdString(cfg->v_Division->getString()));//XXX
 
     p->initAllObjects();
 

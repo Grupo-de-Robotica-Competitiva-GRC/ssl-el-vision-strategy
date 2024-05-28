@@ -101,7 +101,7 @@ void Robot::Kicker::step()
         kickstate--;
         if (kickstate<=0) kicking = NO_KICK;
     }
-    else if (rolling!=0)
+    else if (rolling!=0 && rob->division != "SSL - EL")
     {
         box->setColor(1,0.7,0);
         if (isTouchingBall())
@@ -155,7 +155,7 @@ void Robot::Kicker::kick(dReal kickspeedx, dReal kickspeedz)
     dReal dx,dy,dz;
     dReal vx,vy,vz;
     rob->chassis->getBodyDirection(dx,dy,dz);dz = 0;
-    dReal zf = kickspeedz;
+    dReal zf = (rob->division != "SSL - EL") ? kickspeedz : 0;
     unholdBall();
     if (isTouchingBall())
     {
@@ -203,7 +203,7 @@ void Robot::Kicker::unholdBall(){
     }
 }
 
-Robot::Robot(PWorld* world,PBall *ball,ConfigWidget* _cfg,dReal x,dReal y,dReal z,dReal r,dReal g,dReal b,int rob_id,int wheeltexid,int dir)
+Robot::Robot(PWorld* world,PBall *ball,ConfigWidget* _cfg,dReal x,dReal y,dReal z,dReal r,dReal g,dReal b,int rob_id,int wheeltexid,int dir, QString div)
 {      
     m_r = r;
     m_g = g;
@@ -216,6 +216,7 @@ Robot::Robot(PWorld* world,PBall *ball,ConfigWidget* _cfg,dReal x,dReal y,dReal 
     m_dir = dir;
     cfg = _cfg;
     m_rob_id = rob_id;
+    division = div;
 
     AccSpeedupAbsoluteMax = cfg->robotSettings.AccSpeedupAbsoluteMax;
     AccSpeedupAngularMax = cfg->robotSettings.AccSpeedupAngularMax;

@@ -40,6 +40,7 @@ RobotWidget::RobotWidget(QWidget* parent, ConfigWidget* cfg)
 
     vellabel = new QLabel;
     acclabel = new QLabel;
+    divlabel = new QLabel;
     resetBtn = new QPushButton("Reset");
     locateBtn = new QPushButton("Locate");
     onOffBtn = new QPushButton("Turn Off");
@@ -51,10 +52,12 @@ RobotWidget::RobotWidget(QWidget* parent, ConfigWidget* cfg)
     layout->addWidget(robotCombo,1,2);
     layout->addWidget(new QLabel("Velocity"),2,1);
     layout->addWidget(vellabel,2,2);
-    layout->addWidget(resetBtn,3,1);
-    layout->addWidget(locateBtn,3,2);
-    layout->addWidget(onOffBtn,4,1);
-    layout->addWidget(setPoseBtn,4,2);
+    layout->addWidget(new QLabel("Division"),3,1);
+    layout->addWidget(divlabel,3,2);
+    layout->addWidget(resetBtn,4,1);
+    layout->addWidget(locateBtn,4,2);
+    layout->addWidget(onOffBtn,5,1);
+    layout->addWidget(setPoseBtn,5,2);
     QWidget *widget = new QWidget(this);
     widget->setLayout(layout);
     widget->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);

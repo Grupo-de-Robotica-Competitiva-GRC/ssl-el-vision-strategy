@@ -55,6 +55,7 @@ public:
     dJointID dummy_to_chassis;
     PBox* boxes[3]{};
     bool on;
+    QString division;
     //these values are not controled by this class
     bool selected{};
     dReal select_x{},select_y{},select_z{};
@@ -96,7 +97,7 @@ public:
         Robot* rob;
     } *kicker;
 
-    Robot(PWorld* world,PBall* ball,ConfigWidget* _cfg,dReal x,dReal y,dReal z,dReal r,dReal g,dReal b,int rob_id,int wheeltexid,int dir);
+    Robot(PWorld* world,PBall* ball,ConfigWidget* _cfg,dReal x,dReal y,dReal z,dReal r,dReal g,dReal b,int rob_id,int wheeltexid,int dir, QString div);
     ~Robot();
     void step();
     void drawLabel();
