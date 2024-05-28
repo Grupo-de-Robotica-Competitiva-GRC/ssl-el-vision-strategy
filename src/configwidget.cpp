@@ -41,20 +41,23 @@ ConfigWidget::ConfigWidget() {
 
   VarListPtr game_vars(new VarList("Game"));
   geo_vars->addChild(game_vars);
-  ADD_ENUM(StringEnum, Division, "Division A", "Division")
-  ADD_TO_ENUM(Division, "Division A");
-  ADD_TO_ENUM(Division, "Division B");
+  ADD_ENUM(StringEnum, Division, "SSL - Div A", "Division")
+  ADD_TO_ENUM(Division, "SSL - Div A");
+  ADD_TO_ENUM(Division, "SSL - Div B");
+  ADD_TO_ENUM(Division, "SSL - EL");
   END_ENUM(game_vars, Division);
   ADD_VALUE(game_vars,Int, Robots_Count, 11, "Robots Count")
   ADD_VALUE(game_vars, String, ColorRobotBlue, "#0000ff", "Color Robot Blue")
   ADD_VALUE(game_vars, String, ColorRobotYellow, "#ffff00", "Color Robot Yellow")
 
   VarListPtr fields_vars(new VarList("Field"));
-  VarListPtr div_a_vars(new VarList("Division A"));
-  VarListPtr div_b_vars(new VarList("Division B"));
+  VarListPtr div_a_vars(new VarList("SSL - Div A"));
+  VarListPtr div_b_vars(new VarList("SSL - Div B"));
+  VarListPtr el_vars(new VarList("SSL - EL"));
   geo_vars->addChild(fields_vars);
   fields_vars->addChild(div_a_vars);
   fields_vars->addChild(div_b_vars);
+  fields_vars->addChild(el_vars);
 
   ADD_VALUE(div_a_vars, Double, DivA_Field_Line_Width,0.010,"Line Thickness")
   ADD_VALUE(div_a_vars, Double, DivA_Field_Length,12.000,"Length")
@@ -87,6 +90,22 @@ ConfigWidget::ConfigWidget() {
   ADD_VALUE(div_b_vars, Double, DivB_Goal_Depth,0.18,"Goal depth")
   ADD_VALUE(div_b_vars, Double, DivB_Goal_Width,1.000,"Goal width")
   ADD_VALUE(div_b_vars, Double, DivB_Goal_Height,0.160,"Goal height")
+
+  ADD_VALUE(el_vars, Double, EL_Field_Line_Width,0.010,"Line Thickness")
+  ADD_VALUE(el_vars, Double, EL_Field_Length,4.500,"Length")
+  ADD_VALUE(el_vars, Double, EL_Field_Width,3.000,"Width")
+  ADD_VALUE(el_vars, Double, EL_Field_Rad,0.500,"Radius")
+  ADD_VALUE(el_vars, Double, EL_Field_Free_Kick,0.700,"Free Kick Distance From Defense Area")
+  ADD_VALUE(el_vars, Double, EL_Field_Penalty_Width,1.350,"Penalty width")
+  ADD_VALUE(el_vars, Double, EL_Field_Penalty_Depth,0.500,"Penalty depth")
+  ADD_VALUE(el_vars, Double, EL_Field_Penalty_Point,2.950,"Penalty point") //TODO: fix penalty point pos
+  ADD_VALUE(el_vars, Double, EL_Field_Margin,0.5,"Margin")
+  ADD_VALUE(el_vars, Double, EL_Field_Referee_Margin,0.0,"Referee margin")
+  ADD_VALUE(el_vars, Double, EL_Wall_Thickness,0.020,"Wall thickness")
+  ADD_VALUE(el_vars, Double, EL_Goal_Thickness,0.020,"Goal thickness")
+  ADD_VALUE(el_vars, Double, EL_Goal_Depth,0.18,"Goal depth")
+  ADD_VALUE(el_vars, Double, EL_Goal_Width,0.800,"Goal width")
+  ADD_VALUE(el_vars, Double, EL_Goal_Height,0.160,"Goal height")
 
   ADD_ENUM(StringEnum,YellowTeam,"Parsian","Yellow Team");
   END_ENUM(geo_vars,YellowTeam)
@@ -154,7 +173,7 @@ ConfigWidget::ConfigWidget() {
         ADD_VALUE(vanishing_vars,Double,yellow_team_vanishing,0,"Yellow team")
         ADD_VALUE(vanishing_vars,Double,ball_vanishing,0,"Ball")
 
-    world=VarXML::read(world,(QDir::homePath() + QString("/.grsim.xml")).toStdString());
+    world=VarXML::read(world,(QDir::homePath() + QString("/.grsim_maracatronics.xml")).toStdString());
 
 
     std::string blueteam = v_BlueTeam->getString();
@@ -208,7 +227,7 @@ ConfigWidget::ConfigWidget() {
 
 ConfigWidget::~ConfigWidget() {
     delete robot_settings;
-    VarXML::write(world,(QDir::homePath() + QString("/.grsim.xml")).toStdString());
+    VarXML::write(world,(QDir::homePath() + QString("/.grsim_maracatronics.xml")).toStdString());
 }
 
 

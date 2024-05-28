@@ -55,7 +55,8 @@ using namespace VarTypes;
 #define DEF_FIELD_VALUE(type,Type,name)  \
             std::shared_ptr<VarTypes::Var##Type> v_DivA_##name; \
             std::shared_ptr<VarTypes::Var##Type> v_DivB_##name; \
-            inline type name() {return (Division() == "Division A" ? v_DivA_##name: v_DivB_##name)->get##Type(); }
+            std::shared_ptr<VarTypes::Var##Type> v_EL_##name; \
+            inline type name() {return (Division() == "SSL - Div A" ? v_DivA_##name: Division() == "SSL - Div B" ? v_DivB_##name : v_EL_##name)->get##Type(); }
 
             
 #define DEF_ENUM(type,name)  \
@@ -76,7 +77,8 @@ using namespace VarTypes;
 #define DEF_FIELD_VALUE(type,Type,name)  \
             std::shared_ptr<VarTypes::Var##Type> v_DivA_##name; \
             std::shared_ptr<VarTypes::Var##Type> v_DivB_##name; \
-            inline type name() {return (Division() == "Division A" ? v_DivA_##name: v_DivB_##name)->get##Type(); }
+            std::shared_ptr<VarTypes::Var##Type> v_EL_##name; \
+            inline type name() {return (Division() == "SSL - Div A" ? v_DivA_##name: Division() == "SSL - Div B" ? v_DivB_##name : v_EL_##name)->get##Type(); }
 
 #define DEF_ENUM(type,name)  \
             std::shared_ptr<VarTypes::VarStringEnum> v_##name; \

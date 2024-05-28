@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     
     QCoreApplication::setOrganizationName("Parsian");
     QCoreApplication::setOrganizationDomain("parsian-robotics.com");
-    QCoreApplication::setApplicationName("grSim");
+    QCoreApplication::setApplicationName("Maracatronics - grSim");
     QApplication a(argc, argv);
 
     QCommandLineParser parser;
