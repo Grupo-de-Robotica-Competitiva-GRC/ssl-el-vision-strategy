@@ -38,15 +38,15 @@ MainWindow::MainWindow(QWidget *parent)
     cmbTeam->addItem("Blue");
     lblChip = new QLabel("Chip (m/s)", this);
     lblKick = new QLabel("Kick (m/s)", this);
-    txtInfo = new QTextEdit(this);
+    //txtInfo = new QTextEdit(this);
     chkVel = new QCheckBox("Send Velocity? (or wheels)", this);
     chkSpin = new QCheckBox("Spin", this);
     btnSend = new QPushButton("Send", this);
     btnReset = new QPushButton("Reset", this);
     btnConnect = new QPushButton("Connect", this);
-    txtInfo->setReadOnly(true);
-    txtInfo->setHtml("This program is part of <b>grSim RoboCup SSL Simulator</b> package.<br />For more information please refer to <a href=\"http://eew.aut.ac.ir/~parsian/grsim/\">http://eew.aut.ac.ir/~parsian/grsim</a><br /><font color=\"gray\">This program is free software under the terms of GNU General Public License Version 3.</font>");
-    txtInfo->setFixedHeight(70);
+    //txtInfo->setReadOnly(true);
+    //txtInfo->setHtml("This program is part of <b>grSim RoboCup SSL Simulator</b> package.<br />For more information please refer to <a href=\"http://eew.aut.ac.ir/~parsian/grsim/\">http://eew.aut.ac.ir/~parsian/grsim</a><br /><font color=\"gray\">This program is free software under the terms of GNU General Public License Version 3.</font>");
+    //txtInfo->setFixedHeight(70);
     layout->addWidget(lblIp, 1, 1, 1, 1);layout->addWidget(edtIp, 1, 2, 1, 1);
     layout->addWidget(lblPort, 1, 3, 1, 1);layout->addWidget(edtPort, 1, 4, 1, 1);
     layout->addWidget(lblId, 2, 1, 1, 1);layout->addWidget(edtId, 2, 2, 1, 1);layout->addWidget(cmbTeam, 2, 3, 1, 2);
@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(lblKick, 7, 3, 1, 1);layout->addWidget(edtKick, 7, 4, 1, 1);
     layout->addWidget(chkSpin, 8, 1, 1, 4);
     layout->addWidget(btnConnect, 9, 1, 1, 2);layout->addWidget(btnSend, 9, 3, 1, 1);layout->addWidget(btnReset, 9, 4, 1, 1);
-    layout->addWidget(txtInfo, 10, 1, 1, 4);
+    //layout->addWidget(txtInfo, 10, 1, 1, 4);
     timer = new QTimer (this);
     timer->setInterval(20);
     connect(edtIp, SIGNAL(textChanged(QString)), this, SLOT(disconnectUdp()));
