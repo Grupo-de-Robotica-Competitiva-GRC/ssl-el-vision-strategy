@@ -187,8 +187,8 @@ void MainWindow::sendPacket()
 void MainWindow::receiveBtnClicked()
 {
     // Configurar o endereço e porta de multicast
-    QHostAddress multicastAddress("222.5.23.2"); // Verifique se este é o endereço correto
-    quint16 port = 10006;                        // Verifique se esta é a porta correta
+    QHostAddress multicastAddress("222.5.23.2");
+    quint16 port = 10006;
 
     // Fechar o socket atual se estiver aberto
     if (udpsocket.isOpen())
