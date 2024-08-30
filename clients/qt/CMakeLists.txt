@@ -33,6 +33,10 @@ protobuf_generate_cpp(PROTO_CPP PROTO_H
     ../../src/proto/grSim_Replacement.proto
     ../../src/proto/grSim_Commands.proto
     ../../src/proto/grSim_Packet.proto
+    ../../src/proto/ssl_vision_wrapper.proto
+    ../../src/proto/ssl_vision_geometry.proto
+    ../../src/proto/ssl_vision_detection.proto
+
 )
 
 set(app client)
