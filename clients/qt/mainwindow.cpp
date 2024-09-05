@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     btnReset = new QPushButton("Reset", this);
     btnConnect = new QPushButton("Connect", this);
     btnReceive = new QPushButton("Receive", this);
+    btnStopReceive = new QPushButton("Stop Receiving", this); //interrupção de recebimento de dados 
     // txtInfo->setReadOnly(true);
     // txtInfo->setHtml("This program is part of <b>grSim RoboCup SSL Simulator</b> package.<br />For more information please refer to <a href=\"http://eew.aut.ac.ir/~parsian/grsim/\">http://eew.aut.ac.ir/~parsian/grsim</a><br /><font color=\"gray\">This program is free software under the terms of GNU General Public License Version 3.</font>");
     // txtInfo->setFixedHeight(70);
@@ -81,7 +82,8 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(btnConnect, 9, 1, 1, 2);
     layout->addWidget(btnSend, 9, 3, 1, 1);
     layout->addWidget(btnReset, 9, 4, 1, 1);
-    layout->addWidget(btnReceive, 10, 1, 1, 4);
+    layout->addWidget(btnReceive, 10, 1, 1, 2); //atualizando o n° de colunas
+    layout->addWidget(btnStopReceive, 10, 3, 1, 2); // Botão para parar o recebimento
     layout->addWidget(txtInfo, 11, 1, 1, 4);
     // layout->addWidget(txtInfo, 10, 1, 1, 4);
     timer = new QTimer(this);
@@ -93,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(btnSend, SIGNAL(clicked()), this, SLOT(sendBtnClicked()));
     connect(btnReset, SIGNAL(clicked()), this, SLOT(resetBtnClicked()));
     connect(btnReceive, SIGNAL(clicked()), this, SLOT(receiveBtnClicked()));
+    connect(btnStopReceive, SIGNAL(clicked()), this, SLOT(stopReceiving())); // Conectando o botão ao slot
     btnSend->setDisabled(true);
     chkVel->setChecked(true);
     sending = false;
@@ -187,9 +190,10 @@ void MainWindow::sendPacket()
 void MainWindow::receiveBtnClicked()
 {
     // Configurar o endereço e porta de multicast
-    QHostAddress multicastAddress("222.5.23.2");
-    quint16 port = 10006;
-
+    //QHostAddress multicastAddress("222.5.23.2");
+    //quint16 port = 10006;
+    QHostAddress multicastAddress("224.5.23.2");
+    quint16 port = 10020;
     // Fechar o socket atual se estiver aberto
     if (udpsocket.isOpen())
     {
@@ -305,4 +309,18 @@ void MainWindow::processPendingDatagrams()
             }
         }
     }
+}
+
+void MainWindow::stopReceiving()
+{   
+
+    udpsocket.close(); // Fecha o socket para interromper o recebimento
+    disconnect(&udpsocket, &QUdpSocket::readyRead, this, &MainWindow::processPendingDatagrams); // Desconecta o sinal
+    txtInfo->append("Recebimento de dados interrompido."); // Mensagem de log
+    /*if (udpsocket.isOpen()) {
+        
+        udpsocket.close(); // Fecha o socket para interromper o recebimento
+        disconnect(&udpsocket, &QUdpSocket::readyRead, this, &MainWindow::processPendingDatagrams); // Desconecta o sinal
+        txtInfo->append("Recebimento de dados interrompido."); // Mensagem de log
+    }*/
 }

@@ -34,6 +34,7 @@ public slots:
     void processPendingDatagrams();
     void printRobotInfo(const SSL_DetectionRobot &robot);
     void updateRobotInfo(const SSL_DetectionRobot &robot, const QString &color);
+    void stopReceiving();
 
 private:
     QPushButton *btnReceive;
@@ -59,6 +60,7 @@ private:
     QPushButton *btnSend;
     QPushButton *btnReset;
     QPushButton *btnConnect;
+    QPushButton *btnStopReceive ;
     QTimer *timer;
     QLabel *lblStatus;
 };
