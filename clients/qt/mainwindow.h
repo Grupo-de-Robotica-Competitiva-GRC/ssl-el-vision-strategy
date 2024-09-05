@@ -32,8 +32,6 @@ public slots:
     void disconnectUdp();
     void receiveBtnClicked();
     void processPendingDatagrams();
-    void printRobotInfo(const SSL_DetectionRobot &robot);
-    void updateRobotInfo(const SSL_DetectionRobot &robot, const QString &color);
     void stopReceiving();
 
 private:
@@ -60,7 +58,7 @@ private:
     QPushButton *btnSend;
     QPushButton *btnReset;
     QPushButton *btnConnect;
-    QPushButton *btnStopReceive ;
+    QPushButton *btnStopReceive;
     QTimer *timer;
     QLabel *lblStatus;
 };
