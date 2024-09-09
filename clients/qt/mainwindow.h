@@ -38,6 +38,7 @@ private:
     QPushButton *btnReceive;
     bool sending, reseting;
     QUdpSocket udpsocket;
+    QUdpSocket udpsocket_rec;
     QHostAddress _addr;
     quint16 _port;
     QLineEdit *edtIp;

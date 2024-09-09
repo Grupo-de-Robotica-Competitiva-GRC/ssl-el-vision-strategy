@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "*.proto": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "new": "cpp",
+        "*.tcc": "cpp",
+        "fstream": "cpp"
     }
 }

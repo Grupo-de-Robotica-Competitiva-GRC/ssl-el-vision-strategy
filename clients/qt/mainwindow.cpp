@@ -6,7 +6,8 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
-      udpsocket(this)
+      udpsocket(this),
+      udpsocket_rec(this) 
 {
     QGridLayout *layout = new QGridLayout(this);
     edtIp = new QLineEdit("127.0.0.1", this);
@@ -191,31 +192,31 @@ void MainWindow::sendPacket()
 void MainWindow::receiveBtnClicked()
 {
     // Configurar o endereço e porta de multicast
-    QHostAddress multicastAddress("222.5.23.2");
-    quint16 port = 10006;
-    // QHostAddress multicastAddress("224.5.23.2");
-    // quint16 port = 10020;
+    //QHostAddress multicastAddress("222.5.23.2");
+    //quint16 port = 10006;
+    QHostAddress multicastAddress("224.5.23.2");
+    quint16 port = 10020;
     //  Fechar o socket atual se estiver aberto
-    if (udpsocket.isOpen())
+    if (udpsocket_rec.isOpen())
     {
-        udpsocket.close();
+        udpsocket_rec.close();
     }
 
     // Configurar o socket para escutar no endereço multicast
-    udpsocket.bind(QHostAddress::AnyIPv4, port, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
-    udpsocket.joinMulticastGroup(multicastAddress);
+    udpsocket_rec.bind(QHostAddress::AnyIPv4, port, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
+    udpsocket_rec.joinMulticastGroup(multicastAddress);
 
     // Conectar o slot de leitura para processar os dados recebidos
-    connect(&udpsocket, &QUdpSocket::readyRead, this, &MainWindow::processPendingDatagrams);
+    connect(&udpsocket_rec, &QUdpSocket::readyRead, this, &MainWindow::processPendingDatagrams);
 }
 
 void MainWindow::processPendingDatagrams()
 {
-    while (udpsocket.hasPendingDatagrams())
+    while (udpsocket_rec.hasPendingDatagrams())
     {
         QByteArray datagram;
-        datagram.resize(udpsocket.pendingDatagramSize());
-        udpsocket.readDatagram(datagram.data(), datagram.size());
+        datagram.resize(udpsocket_rec.pendingDatagramSize());
+        udpsocket_rec.readDatagram(datagram.data(), datagram.size());
 
         // Variável para acumular as informações para o txtInfo
         QString info;
@@ -406,10 +407,11 @@ void MainWindow::processPendingDatagrams()
 }
 
 void MainWindow::stopReceiving()
-{
-
-    udpsocket.close();                                                                          // Fecha o socket para interromper o recebimento
-    disconnect(&udpsocket, &QUdpSocket::readyRead, this, &MainWindow::processPendingDatagrams); // Desconecta o sinal
+{   
+    
+    udpsocket_rec.close();  
+                                                                  // Fecha o socket para interromper o recebimento
+    disconnect(&udpsocket_rec, &QUdpSocket::readyRead, this, &MainWindow::processPendingDatagrams); // Desconecta o sinal
     txtInfo->append("Recebimento de dados interrompido.");                                      // Mensagem de log
     /*if (udpsocket.isOpen()) {
 
