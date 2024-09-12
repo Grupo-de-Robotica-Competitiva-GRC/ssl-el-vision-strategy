@@ -261,7 +261,8 @@ void MainWindow::processPendingDatagrams()
                 int balls_n = detection.balls_size();
                 int robots_blue_n = detection.robots_blue_size();
                 int robots_yellow_n = detection.robots_yellow_size();
-
+                info += QString("Robots blue   %1\n").arg(robots_blue_n);
+                info += QString("Robots Yellow   %1\n").arg(robots_yellow_n);
                 // Ball info:
                 for (int i = 0; i < balls_n; i++)
                 {
@@ -346,6 +347,7 @@ void MainWindow::processPendingDatagrams()
                 }
 
                 // Yellow robot info:
+                
                 for (int i = 0; i < robots_yellow_n; i++)
                 {
                     SSL_DetectionRobot robot = detection.robots_yellow(i);
